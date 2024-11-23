@@ -16,7 +16,7 @@ module.exports = defineConfig({
     debug: true,
   },
   e2e: {
-    baseUrl: "https://staging-api.bootcampshub.ai",
+    baseUrl: "https://staging-api.bootcampshub.ai/api",
     setupNodeEvents(on, config) {
       try {
         require("cypress-mochawesome-reporter/plugin")(on);

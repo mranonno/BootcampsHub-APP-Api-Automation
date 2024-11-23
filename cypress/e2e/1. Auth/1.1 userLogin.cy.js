@@ -5,7 +5,7 @@ describe("As a student I should be able to login to the portal with valid creden
   it("should be able to login", () => {
     cy.request({
       method: "POST",
-      url: "/api/user/login",
+      url: "/user/login",
       body: {
         email: userEmail,
         password: userPassword,
