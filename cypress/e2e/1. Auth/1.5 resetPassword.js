@@ -19,7 +19,7 @@ describe("As a student, I should be able to reset my password successfully with 
       });
     });
   
-    it.skip("Checking if the user can reset their password or not", () => {
+    it("Checking if the user can reset their password or not", () => {
       cy.request({
         method: "PATCH",
         url: "/api/user/password/reset",
