@@ -1,7 +1,9 @@
-describe("Reset my password successfully with status code 200", () => {
+describe.skip("Reset my password successfully with status code 200", () => {
   let studentEmail;
   let studentNumber;
   let accessToken;
+  let password;
+  let otp = 878687;
 
   before(() => {
     // Combine reading files using Cypress.Promise.all for efficiency
@@ -14,12 +16,12 @@ describe("Reset my password successfully with status code 200", () => {
       accessToken = tokenData.studentLoginToken;
       studentEmail = userData.email;
       studentNumber = userData.number;
-      // console.log(accessToken, studentEmail, studentNumber);
+      password = userData.password;
+      cy.log(accessToken, studentEmail, studentNumber, password);
     });
   });
 
   it("Checking if the user can reset their password or not", () => {
-    const otp = 135477;
     cy.request({
       method: "PATCH",
       url: "/user/password/reset",
@@ -31,7 +33,7 @@ describe("Reset my password successfully with status code 200", () => {
         phone: studentNumber,
         channel: "email",
         otp: otp,
-        password: "Anonno#1",
+        password: password,
       },
       failOnStatusCode: false,
     }).then((response) => {

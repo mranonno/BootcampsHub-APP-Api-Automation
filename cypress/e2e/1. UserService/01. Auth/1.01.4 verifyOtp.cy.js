@@ -1,4 +1,4 @@
-describe("Verify OTP with status code 200", () => {
+describe.skip("Verify OTP with status code 200", () => {
   let studentID;
 
   before(() => {

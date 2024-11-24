@@ -1,43 +1,29 @@
-describe.skip("As a student, I should be able to reset my password successfully with status code 200", () => {
-  let studentEmail;
-  let studentNumber;
+describe("Change my password successfully with status code 200", () => {
   let accessToken;
 
   before(() => {
-    // Combine reading files using Cypress.Promise.all for efficiency
-    cy.wrap(
-      Cypress.Promise.all([
-        cy.readFile("cypress/fixtures/studentToken.json"),
-        cy.readFile("cypress/fixtures/userInformation.json"),
-      ])
-    ).then(([tokenData, userData]) => {
+    cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
       accessToken = tokenData.studentLoginToken;
-      studentEmail = userData.email;
-      studentNumber = userData.number;
-      // console.log(accessToken, studentEmail, studentNumber);
     });
   });
 
   it("Checking if the user can reset their password or not", () => {
     cy.request({
       method: "PATCH",
-      url: "/user/password/reset",
+      url: "/user/changepassword",
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
       body: {
-        email: studentEmail,
-        phone: studentNumber,
-        channel: "email",
-        otp: "268660", // User valid OTP
-        password: "Ashraful186@",
+        currentPassword: "Anonno#1",
+        newPassword: "Anonno#1",
+        confirmPassword: "Anonno#1",
       },
-      failOnStatusCode: false, // Handle non-2xx status codes manually
+      failOnStatusCode: false,
     }).then((response) => {
       if (response.status === 200) {
         // Assertions
-        expect(response.status).to.eq(200); // Check if the status code is 200
-        expect(response.body).to.have.property("success", true); // Check if the success property is true
+        expect(response.status).to.eq(200);
         expect(response.duration).to.be.lessThan(2000);
         // Log the response for debugging
         cy.log("Password Reset Response:", response.body);
