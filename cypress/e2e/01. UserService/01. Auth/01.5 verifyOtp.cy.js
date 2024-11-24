@@ -1,26 +1,27 @@
 import { faker } from "@faker-js/faker";
 
-describe("As a student I should be able to verify user successfully with status code 200", () => {
+describe.skip("As a student I should be able to verify successfully with status code 200", () => {
   let studentID;
 
   before(() => {
-    cy.readFile("cypress/fixtures/studentLoginID.json").then((data) => {
-      studentID = data.LoginID;
+    cy.readFile("cypress/fixtures/rejisterId.json").then((data) => {
+      studentID = data.studentUserRegisterId;
     });
   });
 
-  it.skip("should be able to verify user", () => {
-    const otp = "863182"; // OTP should match the one received via email
+  it.skip("should be able to verify", () => {
+    const otp = "654911"; // Define OTP for verification
 
     cy.request({
       method: "POST",
-      url: "/user/verify",
+      url: "/user/verifyotp",
       body: {
         otp: otp,
         channel: "email",
         userId: studentID, // Use student ID obtained from fixture
       },
     }).then((response) => {
+      // Check if the request was successful
       if (response.status === 200) {
         cy.log("Verification successful"); // Log successful verification
         console.log("Verification successful");

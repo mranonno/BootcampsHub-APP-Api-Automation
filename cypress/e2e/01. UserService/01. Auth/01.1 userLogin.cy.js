@@ -1,6 +1,12 @@
 describe("As a student I should be able to login to the portal with valid credential and get stats code 200", () => {
-  const userEmail = "186mdshimul@gmail.com"; // Define user email
-  const userPassword = "Ashraful186@"; // Define user password
+  let userEmail;
+  let userPassword;
+  before(() => {
+    cy.readFile("cypress/fixtures/userInformation.json").then((data) => {
+      userEmail = data.email;
+      userPassword = data.password;
+    });
+  });
 
   it("should be able to login", () => {
     cy.request({
@@ -26,18 +32,15 @@ describe("As a student I should be able to login to the portal with valid creden
           LoginID: studentLoginID,
         });
 
-        // Assertions
         expect(response.status).to.eq(200);
         expect(response.body).to.have.property("token");
         expect(response.body.success).to.eq(true);
         expect(response.duration).to.be.lessThan(2000);
-        // Log token and login ID
         cy.log("User Token:", studentToken);
         cy.log("User ID:", studentLoginID);
         console.log("User Token:", studentToken);
         console.log("User ID:", studentLoginID);
       } else {
-        // Handle unsuccessful login
         cy.log("Login failed with status:", response.status);
         cy.log(`Login failed  ${response.body.error}`);
         cy.log(`Login failed with status code ${response.status}`);

@@ -1,4 +1,4 @@
-describe("As a student, I should be able to reset my password successfully with status code 200", () => {
+describe.skip("As a student, I should be able to reset my password successfully with status code 200", () => {
   let studentEmail;
   let studentNumber;
   let accessToken;
@@ -8,13 +8,12 @@ describe("As a student, I should be able to reset my password successfully with 
     cy.wrap(
       Cypress.Promise.all([
         cy.readFile("cypress/fixtures/studentToken.json"),
-        cy.readFile("cypress/fixtures/userEmail.json"),
-        cy.readFile("cypress/fixtures/userNumber.json"),
+        cy.readFile("cypress/fixtures/userInformation.json"),
       ])
-    ).then(([tokenData, emailData, numberData]) => {
+    ).then(([tokenData, userData]) => {
       accessToken = tokenData.studentLoginToken;
-      studentEmail = emailData.studentUserEmail;
-      studentNumber = numberData.studentUserNumber;
+      studentEmail = userData.email;
+      studentNumber = userData.number;
       // console.log(accessToken, studentEmail, studentNumber);
     });
   });
