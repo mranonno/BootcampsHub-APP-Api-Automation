@@ -1,4 +1,4 @@
-describe("Change my password successfully with status code 200", () => {
+describe("sync push token successfully with status code 200", () => {
   let accessToken;
 
   before(() => {
@@ -7,17 +7,15 @@ describe("Change my password successfully with status code 200", () => {
     });
   });
 
-  it("Checking if the user can reset their password or not", () => {
+  it("Checking if the sync up push token or not", () => {
     cy.request({
-      method: "PATCH",
-      url: "/user/changepassword",
+      method: "POST",
+      url: "/user/sync-pushtoken",
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
       body: {
-        currentPassword: "Anonno#1",
-        newPassword: "Anonno#1",
-        confirmPassword: "Anonno#1",
+        pushToken: "user",
       },
       failOnStatusCode: false,
     }).then((response) => {
@@ -25,6 +23,7 @@ describe("Change my password successfully with status code 200", () => {
         // Assertions
         expect(response.status).to.eq(200);
         expect(response.duration).to.be.lessThan(2000);
+        expect(response.body).to.have.property("success", true);
         // Log the response for debugging
         cy.log("response.body", JSON.stringify(response.body, null, 1));
         cy.log("Password Reset Response:", response.body);

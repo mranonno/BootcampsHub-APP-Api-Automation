@@ -1,4 +1,4 @@
-describe("Change my password successfully with status code 200", () => {
+describe("Update user successfully with status code 200", () => {
   let accessToken;
 
   before(() => {
@@ -10,14 +10,32 @@ describe("Change my password successfully with status code 200", () => {
   it("Checking if the user can reset their password or not", () => {
     cy.request({
       method: "PATCH",
-      url: "/user/changepassword",
+      url: "/user/updateuser",
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
       body: {
-        currentPassword: "Anonno#1",
-        newPassword: "Anonno#1",
-        confirmPassword: "Anonno#1",
+        firstName: "Anonno",
+        lastName: "Das",
+        about: "Nothing",
+        personalData: {
+          address: {
+            street: "",
+            city: "Narail",
+            postalCode: "7521",
+            state: "Khulna",
+            country: "Bangladesh",
+          },
+          socialMedia: {
+            facebook: "",
+            github: "",
+            instagram: "",
+            linkedin: "",
+            twitter: "",
+          },
+          resume: "",
+          bio: "Don't have bio",
+        },
       },
       failOnStatusCode: false,
     }).then((response) => {
