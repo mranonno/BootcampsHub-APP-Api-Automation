@@ -1,4 +1,4 @@
-describe("As a student I should be able to login to the portal with valid credential and get stats code 200", () => {
+describe("Login to the portal with valid credential and get stats code 200", () => {
   let userEmail;
   let userPassword;
   before(() => {
@@ -29,7 +29,7 @@ describe("As a student I should be able to login to the portal with valid creden
           studentLoginToken: studentToken,
         });
         cy.writeFile("cypress/fixtures/studentLoginID.json", {
-          LoginID: studentLoginID,
+          userId: studentLoginID,
         });
 
         expect(response.status).to.eq(200);

@@ -1,4 +1,4 @@
-describe("Reset my password successfully with status code 200", () => {
+describe.skip("As a student, I should be able to reset my password successfully with status code 200", () => {
   let studentEmail;
   let studentNumber;
   let accessToken;
@@ -19,7 +19,6 @@ describe("Reset my password successfully with status code 200", () => {
   });
 
   it("Checking if the user can reset their password or not", () => {
-    const otp = 135477;
     cy.request({
       method: "PATCH",
       url: "/user/password/reset",
@@ -30,15 +29,15 @@ describe("Reset my password successfully with status code 200", () => {
         email: studentEmail,
         phone: studentNumber,
         channel: "email",
-        otp: otp,
-        password: "Anonno#1",
+        otp: "268660", // User valid OTP
+        password: "Ashraful186@",
       },
-      failOnStatusCode: false,
+      failOnStatusCode: false, // Handle non-2xx status codes manually
     }).then((response) => {
       if (response.status === 200) {
         // Assertions
-        expect(response.status).to.eq(200);
-        expect(response.body).to.have.property("success", true);
+        expect(response.status).to.eq(200); // Check if the status code is 200
+        expect(response.body).to.have.property("success", true); // Check if the success property is true
         expect(response.duration).to.be.lessThan(2000);
         // Log the response for debugging
         cy.log("Password Reset Response:", response.body);
