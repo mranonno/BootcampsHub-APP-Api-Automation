@@ -4,7 +4,6 @@ describe("Get Company Details successfully with status code 200", () => {
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
       accessToken = tokenData.studentLoginToken;
-      slug = tokenData.slug;
     });
     cy.readFile("cypress/fixtures/studentLoginID.json").then((loginData) => {
       slug = loginData.slug;
@@ -12,7 +11,6 @@ describe("Get Company Details successfully with status code 200", () => {
   });
 
   it("Checking if should be able get Company Details or not", () => {
-    cy.log("slug", JSON.stringify(slug, null, 1));
     cy.request({
       method: "GET",
       url: `/organization/details/${slug}`,
