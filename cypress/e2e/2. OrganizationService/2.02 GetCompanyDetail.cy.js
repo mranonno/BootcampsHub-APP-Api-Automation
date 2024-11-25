@@ -6,9 +6,13 @@ describe("Get Company Details successfully with status code 200", () => {
       accessToken = tokenData.studentLoginToken;
       slug = tokenData.slug;
     });
+    cy.readFile("cypress/fixtures/studentLoginID.json").then((loginData) => {
+      slug = loginData.slug;
+    });
   });
 
   it("Checking if should be able get Company Details or not", () => {
+    cy.log("slug", JSON.stringify(slug, null, 1));
     cy.request({
       method: "GET",
       url: `/organization/details/${slug}`,
