@@ -31,8 +31,5 @@ describe("Get OTP on my email successfully with status code 200", () => {
         console.log(response.body);
       }
     });
-    // .catch((error) => {
-    //   cy.log("Request failed:", error.message);
-    // });
   });
 });

@@ -40,6 +40,7 @@ describe("Login to the portal with valid credential and get stats code 200", () 
         cy.log("User ID:", studentLoginID);
         console.log("User Token:", studentToken);
         console.log("User ID:", studentLoginID);
+        cy.log("response.body", JSON.stringify(response.body, null, 1));
       } else {
         cy.log("Login failed with status:", response.status);
         cy.log(`Login failed  ${response.body.error}`);
