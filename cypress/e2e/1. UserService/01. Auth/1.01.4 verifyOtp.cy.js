@@ -1,16 +1,14 @@
-import { faker } from "@faker-js/faker";
-
-describe.skip("As a student I should be able to verify successfully with status code 200", () => {
+describe.skip("Verify OTP with status code 200", () => {
   let studentID;
 
   before(() => {
-    cy.readFile("cypress/fixtures/rejisterId.json").then((data) => {
-      studentID = data.studentUserRegisterId;
+    cy.readFile("cypress/fixtures/studentLoginID.json").then((data) => {
+      studentID = data.userId;
     });
   });
 
-  it.skip("should be able to verify", () => {
-    const otp = "654911"; // Define OTP for verification
+  it("should be able to verify", () => {
+    const otp = "731258";
 
     cy.request({
       method: "POST",
@@ -23,11 +21,11 @@ describe.skip("As a student I should be able to verify successfully with status 
     }).then((response) => {
       // Check if the request was successful
       if (response.status === 200) {
-        cy.log("Verification successful"); // Log successful verification
-        console.log("Verification successful");
+        cy.log("OTP verification successful");
+        console.log("OTP verification successful");
         // Assertions
-        expect(response.status).to.eq(200); // Check if the status code is 200
-        expect(response.body).to.have.property("success", true); // Check if the success property is true
+        expect(response.status).to.eq(200);
+        expect(response.body).to.have.property("success", true);
         expect(response.duration).to.be.lessThan(2000);
       } else {
         // Handle unsuccessful verification
