@@ -21,9 +21,9 @@ describe("Update user successfully with status code 200", () => {
         personalData: {
           address: {
             street: "",
-            city: "Narail",
-            postalCode: "7521",
-            state: "Khulna",
+            city: "Dhaka",
+            postalCode: "1216",
+            state: "Dhaka",
             country: "Bangladesh",
           },
           socialMedia: {
