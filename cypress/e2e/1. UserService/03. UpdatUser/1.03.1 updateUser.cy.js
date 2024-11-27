@@ -15,8 +15,8 @@ describe("Update user successfully with status code 200", () => {
         Authorization: `Bearer ${accessToken}`,
       },
       body: {
-        firstName: "Anonno",
-        lastName: "Das",
+        firstName: "Md",
+        lastName: "Shimul",
         about: "Nothing",
         personalData: {
           address: {
