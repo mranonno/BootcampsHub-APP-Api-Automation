@@ -2,6 +2,7 @@ describe("Get chapter by category successfully with status code 200", () => {
   let accessToken;
   let program_slug;
   let categoryId = "65eb5eaff6d7cc3e14e90cd7";
+  let enrollmentId;
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
@@ -9,6 +10,9 @@ describe("Get chapter by category successfully with status code 200", () => {
     });
     cy.readFile("cypress/fixtures/programSlug.json").then((programData) => {
       program_slug = programData.programSlug;
+    });
+    cy.readFile("cypress/fixtures/studentLoginID.json").then((loginData) => {
+      enrollmentId = loginData.enrollmentId;
     });
   });
 
@@ -18,6 +22,7 @@ describe("Get chapter by category successfully with status code 200", () => {
       url: `/course/chapterv2/get/${program_slug}/${categoryId}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        Enrollment: enrollmentId,
       },
       body: {
         parent: "",

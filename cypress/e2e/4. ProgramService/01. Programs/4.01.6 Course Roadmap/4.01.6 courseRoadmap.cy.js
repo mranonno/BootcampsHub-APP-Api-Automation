@@ -1,20 +1,20 @@
 describe("Get course roadmap data successfully with status code 200", () => {
   let accessToken;
-  let course_id;
+  let courseId;
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
       accessToken = tokenData.studentLoginToken;
     });
     cy.readFile("cypress/fixtures/courseId.json").then((courseData) => {
-      course_id = courseData.courseId;
+      courseId = courseData.courseId;
     });
   });
 
   it("Checking if should be able get Get course roadmap data or not", () => {
     cy.request({
       method: "GET",
-      url: `/course/roadmap/find/${course_id}`,
+      url: `/course/roadmap/find/${courseId}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

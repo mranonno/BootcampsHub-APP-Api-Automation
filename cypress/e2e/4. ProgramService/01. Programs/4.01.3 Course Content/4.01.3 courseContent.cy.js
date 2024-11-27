@@ -1,20 +1,20 @@
 describe("Get course content successfully with status code 200", () => {
   let accessToken;
-  let program_slug;
+  let programSlug;
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
       accessToken = tokenData.studentLoginToken;
     });
     cy.readFile("cypress/fixtures/programSlug.json").then((slugData) => {
-      program_slug = slugData.programSlug;
+      programSlug = slugData.programSlug;
     });
   });
 
   it("Checking if should be able get Get course content or not", () => {
     cy.request({
       method: "GET",
-      url: `/course/content/${program_slug}`,
+      url: `/course/content/${programSlug}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
