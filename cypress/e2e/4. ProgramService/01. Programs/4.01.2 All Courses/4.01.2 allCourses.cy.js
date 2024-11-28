@@ -12,7 +12,7 @@ describe("Get all Courses successfully with status code 200", () => {
     });
   });
 
-  it("Checking if should be able get Get all Courses or not", () => {
+  it("Checking if should be able Get all Courses or not", () => {
     cy.request({
       method: "POST",
       url: `/course/organization/${slug}`,

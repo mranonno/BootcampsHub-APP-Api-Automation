@@ -11,7 +11,7 @@ describe("Get course content successfully with status code 200", () => {
     });
   });
 
-  it("Checking if should be able get Get course content or not", () => {
+  it("Checking if should be able Get course content or not", () => {
     cy.request({
       method: "GET",
       url: `/course/content/${programSlug}`,

@@ -11,7 +11,7 @@ describe("Get course roadmap data successfully with status code 200", () => {
     });
   });
 
-  it("Checking if should be able get Get course roadmap data or not", () => {
+  it("Checking if should be able Get course roadmap data or not", () => {
     cy.request({
       method: "GET",
       url: `/course/roadmap/find/${courseId}`,

@@ -7,7 +7,7 @@ describe("Get preview chapter by category successfully with status code 200", ()
     });
   });
 
-  it("Checking if should be able get Get preview chapter by category or not", () => {
+  it("Checking if should be able Get preview chapter by category or not", () => {
     cy.request({
       method: "POST",
       url: "/course/chapterv2/preview",

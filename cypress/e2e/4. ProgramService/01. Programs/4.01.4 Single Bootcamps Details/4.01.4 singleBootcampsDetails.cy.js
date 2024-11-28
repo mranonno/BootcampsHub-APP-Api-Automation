@@ -11,7 +11,7 @@ describe("Get single bootcamps details successfully with status code 200", () =>
     });
   });
 
-  it("Checking if should be able get Get single bootcamps details or not", () => {
+  it("Checking if should be able Get single bootcamps details or not", () => {
     cy.request({
       method: "GET",
       url: `/course/single/${program_slug}`,

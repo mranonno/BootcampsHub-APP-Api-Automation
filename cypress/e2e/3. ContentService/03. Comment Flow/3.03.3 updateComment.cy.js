@@ -1,22 +1,22 @@
-describe("Get course details successfully with status code 200", () => {
+describe("Update community post comment successfully with status code 200", () => {
   let accessToken;
-  let program_slug;
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
       accessToken = tokenData.studentLoginToken;
     });
-    cy.readFile("cypress/fixtures/programSlug.json").then((slugData) => {
-      program_slug = slugData.programSlug;
-    });
   });
 
-  it("Checking if should be able Get course details or not", () => {
+  it("Checking if should be able Update community post comment or not", () => {
     cy.request({
-      method: "GET",
-      url: `/course/contentv2/${program_slug}`,
+      method: "PATCH",
+      url: `/content/comment/update/674835d5b419790019bb0f5a`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
+      },
+      body: {
+        comment: "Updated comment again",
+        contentId: "673905dc92731d9ad8c78e37",
       },
       failOnStatusCode: false,
     }).then((response) => {
@@ -27,10 +27,13 @@ describe("Get course details successfully with status code 200", () => {
         expect(response.body).to.have.property("success", true);
         // Log the response for debugging
         cy.log("response.body", JSON.stringify(response.body, null, 1));
-        cy.log("Get course details Response:", response.body);
-        console.log("Get course details Response:", response.body);
+        cy.log("Update community post comment Response:", response.body);
+        console.log("Update community post comment Response:", response.body);
       } else {
-        cy.log("Get course details failed with status code: ", response.status);
+        cy.log(
+          "Update community post comment failed with status code: ",
+          response.status
+        );
         cy.log(response.body.error);
       }
     });
