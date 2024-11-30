@@ -11,7 +11,7 @@ describe("Get all community post successfully with status code 200", () => {
     });
   });
 
-  it("Checking if should be able get Lab Content or not", () => {
+  it("Checking if should be able get all community post or not", () => {
     cy.request({
       method: "POST",
       url: "/content/community/post/getall",
@@ -36,10 +36,13 @@ describe("Get all community post successfully with status code 200", () => {
         expect(response.body).to.have.property("success", true);
         // Log the response for debugging
         cy.log("response.body", JSON.stringify(response.body, null, 1));
-        cy.log("Get lab content Response:", response.body);
-        console.log("Get lab content Response:", response.body);
+        cy.log("Get all community post Response:", response.body);
+        console.log("Get all community post Response:", response.body);
       } else {
-        cy.log("Get lab content failed with status code: ", response.status);
+        cy.log(
+          "Get all community post failed with status code: ",
+          response.status
+        );
         cy.log(response.body.error);
       }
     });
