@@ -28,9 +28,9 @@ describe("Login to the portal with valid credential and get stats code 200", () 
         cy.writeFile("cypress/fixtures/studentToken.json", {
           studentLoginToken: studentToken,
         });
-        cy.writeFile("cypress/fixtures/studentLoginID.json", {
-          userId: studentLoginID,
-        });
+        // cy.writeFile("cypress/fixtures/studentLoginID.json", {
+        //   userId: studentLoginID,
+        // });
 
         expect(response.status).to.eq(200);
         expect(response.body).to.have.property("token");

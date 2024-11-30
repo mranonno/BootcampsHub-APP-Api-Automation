@@ -20,14 +20,13 @@ describe("Create community post comment successfully with status code 200", () =
       },
       failOnStatusCode: false,
     }).then((response) => {
-      if (response.status === 200) {
-        // cy.log("done");
-        // const { comment } = response.body;
-        // cy.writeFile("cypress/fixtures/deleteCommentId.json", {
-        //   commentId: comment._id,
-        // });
+      if (response.status === 201) {
+        const { comment } = response.body;
+        cy.writeFile("cypress/fixtures/deleteCommentId.json", {
+          commentId: comment._id,
+        });
         // Assertions
-        expect(response.status).to.eq(200);
+        expect(response.status).to.eq(201);
         expect(response.duration).to.be.lessThan(2000);
         expect(response.body).to.have.property("success", true);
         // Log the response for debugging
