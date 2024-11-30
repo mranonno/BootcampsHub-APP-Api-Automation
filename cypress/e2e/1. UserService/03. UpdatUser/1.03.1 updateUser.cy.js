@@ -15,15 +15,15 @@ describe("Update user successfully with status code 200", () => {
         Authorization: `Bearer ${accessToken}`,
       },
       body: {
-        firstName: "Anonno",
-        lastName: "Das",
+        firstName: "Md",
+        lastName: "Shimul",
         about: "Nothing",
         personalData: {
           address: {
             street: "",
-            city: "Narail",
-            postalCode: "7521",
-            state: "Khulna",
+            city: "Dhaka",
+            postalCode: "1216",
+            state: "Dhaka",
             country: "Bangladesh",
           },
           socialMedia: {

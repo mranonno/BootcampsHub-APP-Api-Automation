@@ -1,6 +1,7 @@
-describe("My all chats with status code 200", () => {
+describe("Find or Create chats by user with status code 200", () => {
   let accessToken;
   let organizationId;
+  let userId;
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
@@ -8,29 +9,34 @@ describe("My all chats with status code 200", () => {
     });
     cy.readFile("cypress/fixtures/studentLoginID.json").then((loginData) => {
       organizationId = loginData.organizationId;
+      userId = loginData.userId;
     });
   });
 
-  it("Checking if should be able get my all chats or not", () => {
+  it("Checking if should be able Find or Create chats by user or not", () => {
     cy.request({
-      method: "GET",
-      url: "/chat/mychats",
+      method: "POST",
+      url: `/chat/findorcreate/${userId}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
         Organization: organizationId,
       },
+      body: {},
       failOnStatusCode: false,
     }).then((response) => {
       if (response.status === 200) {
         // Assertions
         expect(response.status).to.eq(200);
         expect(response.duration).to.be.lessThan(3000);
-        // expect(response.body).to.have.property("success", true);
+        expect(response.body).to.have.property("success", true);
         // Log the response for debugging
         cy.log("response.body", JSON.stringify(response.body, null, 1));
-        console.log("get my chats Response:", response.body);
+        console.log("Find or Create chats by user Response:", response.body);
       } else {
-        cy.log("Get my chats failed with status code: ", response.status);
+        cy.log(
+          "Find or Create chats by user failed with status code: ",
+          response.status
+        );
         cy.log(response.body.error);
       }
     });

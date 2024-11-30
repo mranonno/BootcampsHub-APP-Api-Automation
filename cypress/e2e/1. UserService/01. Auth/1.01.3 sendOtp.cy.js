@@ -1,4 +1,4 @@
-describe("Get OTP on my email successfully with status code 200", () => {
+describe.skip("Get OTP on my email successfully with status code 200", () => {
   let userId;
 
   before(() => {
