@@ -1,4 +1,4 @@
-describe("Get my interviews successfully with status code 200", () => {
+describe("Submit interview answer successfully with status code 200", () => {
   let accessToken;
   let enrollment;
 
@@ -11,15 +11,20 @@ describe("Get my interviews successfully with status code 200", () => {
     });
   });
 
-  it("Checking if should be able Get my interviews or not", () => {
+  it("Checking if should be able Submit interview answer or not", () => {
     cy.request({
-      method: "GET",
-      url: "/workshop/myworkshop/interview",
+      method: "PUT",
+      url: "/interview/submit-answer",
       headers: {
         Authorization: `Bearer ${accessToken}`,
         Enrollment: enrollment,
       },
-
+      body: {
+        interview: "66bc64f18a5075001979c83e",
+        video: "Interview question answer testing",
+        audio: "",
+        question: "66a45d333992e3001996d0a9",
+      },
       failOnStatusCode: false,
     }).then((response) => {
       if (response.status === 200) {
@@ -29,10 +34,13 @@ describe("Get my interviews successfully with status code 200", () => {
         expect(response.body).to.have.property("success", true);
         // Log the response for debugging
         cy.log("response.body", JSON.stringify(response.body, null, 1));
-        cy.log("Get my interviews Response:", response.body);
-        console.log("Get my interviews Response:", response.body);
+        cy.log("Submit interview answer Response:", response.body);
+        console.log("Submit interview answer Response:", response.body);
       } else {
-        cy.log("Get my interviews failed with status code: ", response.status);
+        cy.log(
+          "Submit interview answer failed with status code: ",
+          response.status
+        );
         cy.log(response.body.error);
       }
     });

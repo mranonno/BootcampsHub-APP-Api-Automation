@@ -1,6 +1,8 @@
-describe("Get my interviews successfully with status code 200", () => {
+describe("Get interview question successfully with status code 200", () => {
   let accessToken;
   let enrollment;
+  let questionId = "66965b09a7931c001920d174";
+  let interviewId = "66bc64f18a5075001979c83e";
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
@@ -11,10 +13,10 @@ describe("Get my interviews successfully with status code 200", () => {
     });
   });
 
-  it("Checking if should be able Get my interviews or not", () => {
+  it("Checking if should be able Get interview question or not", () => {
     cy.request({
       method: "GET",
-      url: "/workshop/myworkshop/interview",
+      url: `/interview/answer/${interviewId}/${questionId}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
         Enrollment: enrollment,
@@ -29,10 +31,13 @@ describe("Get my interviews successfully with status code 200", () => {
         expect(response.body).to.have.property("success", true);
         // Log the response for debugging
         cy.log("response.body", JSON.stringify(response.body, null, 1));
-        cy.log("Get my interviews Response:", response.body);
-        console.log("Get my interviews Response:", response.body);
+        cy.log("Get interview question Response:", response.body);
+        console.log("Get interview question Response:", response.body);
       } else {
-        cy.log("Get my interviews failed with status code: ", response.status);
+        cy.log(
+          "Get interview question failed with status code: ",
+          response.status
+        );
         cy.log(response.body.error);
       }
     });
