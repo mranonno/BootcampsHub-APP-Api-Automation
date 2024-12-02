@@ -1,25 +1,58 @@
-describe("Get my show n tell successfully with status code 200", () => {
+describe("Update calender event successfully with status code 200", () => {
   let accessToken;
-  let enrollment;
+  let eventId;
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
       accessToken = tokenData.studentLoginToken;
     });
-    cy.readFile("cypress/fixtures/studentLoginID.json").then((loginData) => {
-      enrollment = loginData.enrollmentId;
+    cy.readFile("cypress/fixtures/eventId.json").then((eventData) => {
+      eventId = eventData.event_id;
     });
   });
 
-  it("Checking if should be able Get my show n tell or not", () => {
+  it("Checking if should be able Update calender event or not", () => {
     cy.request({
-      method: "GET",
-      url: "/show-tell/myshows",
+      method: "PATCH",
+      url: `/calendar/event/update/${eventId}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        Enrollment: enrollment,
       },
-
+      body: {
+        title: "Update event",
+        start: "2024-07-15T04:34:00.000Z",
+        end: "2024-07-15T05:04:00.000Z",
+        agenda: "Ffff",
+        description: "Ffff",
+        actionItems: "Fff",
+        followUp: "Ffff",
+        notifications: [
+          {
+            timeBefore: "5",
+            methods: ["push"],
+            chatGroups: [],
+          },
+          {
+            timeBefore: 15,
+            methods: ["push"],
+            chatGroups: [],
+          },
+        ],
+        meetingLink: "",
+        eventColor: "gray",
+        eventType: "reviewMeeting",
+        attachments: [],
+        invitations: ["663eeccc2e9c740019d33425", "6633d94abac9199ca01635a4"],
+        isAllDay: false,
+        timeRange: {
+          disabledEditTimeRange: false,
+          turnOn: false,
+          repeatIteration: 1,
+          repeatPeriod: "week",
+          repeatDays: [1],
+        },
+        timeZone: "Asia/Dhaka",
+      },
       failOnStatusCode: false,
     }).then((response) => {
       if (response.status === 200) {
@@ -29,10 +62,13 @@ describe("Get my show n tell successfully with status code 200", () => {
         expect(response.body).to.have.property("success", true);
         // Log the response for debugging
         cy.log("response.body", JSON.stringify(response.body, null, 1));
-        cy.log("Get my show n tell Response:", response.body);
-        console.log("Get my show n tell Response:", response.body);
+        cy.log("Update calender event Response:", response.body);
+        console.log("Update calender event Response:", response.body);
       } else {
-        cy.log("Get my show n tell failed with status code: ", response.status);
+        cy.log(
+          "Update calender event failed with status code: ",
+          response.status
+        );
         cy.log(response.body.error);
       }
     });

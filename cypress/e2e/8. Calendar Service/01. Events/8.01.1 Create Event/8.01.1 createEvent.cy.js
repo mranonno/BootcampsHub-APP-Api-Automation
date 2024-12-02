@@ -1,38 +1,78 @@
-describe("Get my show n tell successfully with status code 200", () => {
+describe("Create a calendar event successfully with status code 200", () => {
   let accessToken;
-  let enrollment;
+  let organizationId;
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
       accessToken = tokenData.studentLoginToken;
     });
-    cy.readFile("cypress/fixtures/studentLoginID.json").then((loginData) => {
-      enrollment = loginData.enrollmentId;
+    cy.readFile("cypress/fixtures/organizationId.json").then((orgData) => {
+      organizationId = orgData.organizationId;
     });
   });
 
-  it("Checking if should be able Get my show n tell or not", () => {
+  it("Checking if should be able Create a calendar event or not", () => {
     cy.request({
-      method: "GET",
-      url: "/show-tell/myshows",
+      method: "POST",
+      url: "/calendar/event/create",
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        Enrollment: enrollment,
+        Organization: organizationId,
       },
-
+      body: {
+        title: "create a new event",
+        start: "2024-07-15T04:34:00.000Z",
+        end: "2024-07-15T05:04:00.000Z",
+        agenda: "Ffff",
+        description: "Ffff",
+        actionItems: "Fff",
+        followUp: "Ffff",
+        notifications: [
+          {
+            timeBefore: "5",
+            methods: ["push"],
+            chatGroups: [],
+          },
+          {
+            timeBefore: 15,
+            methods: ["push"],
+            chatGroups: [],
+          },
+        ],
+        meetingLink: "",
+        eventColor: "gray",
+        eventType: "reviewMeeting",
+        attachments: [],
+        invitations: ["6527902f122aa03f94d8576e", "64ef676669eaf6370c11429c"],
+        isAllDay: false,
+        timeRange: {
+          disabledEditTimeRange: false,
+          turnOn: false,
+          repeatIteration: 1,
+          repeatPeriod: "week",
+          repeatDays: [1],
+        },
+        timeZone: "Asia/Dhaka",
+      },
       failOnStatusCode: false,
     }).then((response) => {
       if (response.status === 200) {
+        cy.writeFile("cypress/fixtures/eventId.json", {
+          event_id: response.body.event._id,
+        });
         // Assertions
         expect(response.status).to.eq(200);
         expect(response.duration).to.be.lessThan(2000);
         expect(response.body).to.have.property("success", true);
         // Log the response for debugging
         cy.log("response.body", JSON.stringify(response.body, null, 1));
-        cy.log("Get my show n tell Response:", response.body);
-        console.log("Get my show n tell Response:", response.body);
+        cy.log("Create a calendar event Response:", response.body);
+        console.log("Create a calendar event Response:", response.body);
       } else {
-        cy.log("Get my show n tell failed with status code: ", response.status);
+        cy.log(
+          "Create a calendar event failed with status code: ",
+          response.status
+        );
         cy.log(response.body.error);
       }
     });
