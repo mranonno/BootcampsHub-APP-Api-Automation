@@ -1,26 +1,26 @@
-describe("Calender config weekends successfully with status code 200", () => {
+describe("Accept invitation successfully with status code 200", () => {
   let accessToken;
-  let type = "weekend";
-  let enrollment;
+  let eventId = "674d3eee5889530019c2ca8c";
+  let participantId = "674d3eee5889530019c2ca8d";
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
       accessToken = tokenData.studentLoginToken;
     });
-    cy.readFile("cypress/fixtures/studentLoginID.json").then((loginData) => {
-      enrollment = loginData.enrollmentId;
-    });
   });
 
-  it("Checking if should be able Calender config weekends or not", () => {
+  it("Checking if should be able Accept invitation or not", () => {
     cy.request({
-      method: "GET",
-      url: `/calendar/config/type/${type}`,
+      method: "PATCH",
+      url: `/calendar/event/invitation/${eventId}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        Enrollment: enrollment,
       },
-
+      body: {
+        action: "status",
+        participantId: participantId,
+        status: "accepted",
+      },
       failOnStatusCode: false,
     }).then((response) => {
       if (response.status === 200) {
@@ -30,13 +30,10 @@ describe("Calender config weekends successfully with status code 200", () => {
         expect(response.body).to.have.property("success", true);
         // Log the response for debugging
         cy.log("response.body", JSON.stringify(response.body, null, 1));
-        cy.log("Calender config weekends Response:", response.body);
-        console.log("Calender config weekends Response:", response.body);
+        cy.log("Accept invitation Response:", response.body);
+        console.log("Accept invitation Response:", response.body);
       } else {
-        cy.log(
-          "Calender config weekends failed with status code: ",
-          response.status
-        );
+        cy.log("Accept invitation failed with status code: ", response.status);
         cy.log(response.body.error);
       }
     });

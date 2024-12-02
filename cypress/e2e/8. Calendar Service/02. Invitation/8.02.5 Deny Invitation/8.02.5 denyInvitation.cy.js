@@ -1,25 +1,26 @@
-describe("Get my show n tell successfully with status code 200", () => {
+describe("Denied invitation successfully with status code 200", () => {
   let accessToken;
-  let enrollment;
+  let eventId = "674d3eee5889530019c2ca8c";
+  let participantId = "674d3eee5889530019c2ca8d";
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
       accessToken = tokenData.studentLoginToken;
     });
-    cy.readFile("cypress/fixtures/studentLoginID.json").then((loginData) => {
-      enrollment = loginData.enrollmentId;
-    });
   });
 
-  it("Checking if should be able Get my show n tell or not", () => {
+  it("Checking if should be able Denied invitation or not", () => {
     cy.request({
-      method: "GET",
-      url: "/show-tell/myshows",
+      method: "PATCH",
+      url: `/calendar/event/invitation/${eventId}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        Enrollment: enrollment,
       },
-
+      body: {
+        action: "status",
+        participantId: participantId,
+        status: "denied",
+      },
       failOnStatusCode: false,
     }).then((response) => {
       if (response.status === 200) {
@@ -29,10 +30,10 @@ describe("Get my show n tell successfully with status code 200", () => {
         expect(response.body).to.have.property("success", true);
         // Log the response for debugging
         cy.log("response.body", JSON.stringify(response.body, null, 1));
-        cy.log("Get my show n tell Response:", response.body);
-        console.log("Get my show n tell Response:", response.body);
+        cy.log("Denied invitation Response:", response.body);
+        console.log("Denied invitation Response:", response.body);
       } else {
-        cy.log("Get my show n tell failed with status code: ", response.status);
+        cy.log("Denied invitation failed with status code: ", response.status);
         cy.log(response.body.error);
       }
     });

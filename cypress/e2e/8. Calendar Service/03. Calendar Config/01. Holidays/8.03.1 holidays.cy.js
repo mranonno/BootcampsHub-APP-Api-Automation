@@ -1,5 +1,6 @@
-describe("Get my show n tell successfully with status code 200", () => {
+describe("Calender config holidays successfully with status code 200", () => {
   let accessToken;
+  let type = "holiday";
   let enrollment;
 
   before(() => {
@@ -11,10 +12,10 @@ describe("Get my show n tell successfully with status code 200", () => {
     });
   });
 
-  it("Checking if should be able Get my show n tell or not", () => {
+  it("Checking if should be able Calender config holidays or not", () => {
     cy.request({
       method: "GET",
-      url: "/show-tell/myshows",
+      url: `/calendar/config/type/${type}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
         Enrollment: enrollment,
@@ -29,10 +30,13 @@ describe("Get my show n tell successfully with status code 200", () => {
         expect(response.body).to.have.property("success", true);
         // Log the response for debugging
         cy.log("response.body", JSON.stringify(response.body, null, 1));
-        cy.log("Get my show n tell Response:", response.body);
-        console.log("Get my show n tell Response:", response.body);
+        cy.log("Calender config holidays Response:", response.body);
+        console.log("Calender config holidays Response:", response.body);
       } else {
-        cy.log("Get my show n tell failed with status code: ", response.status);
+        cy.log(
+          "Calender config holidays failed with status code: ",
+          response.status
+        );
         cy.log(response.body.error);
       }
     });
