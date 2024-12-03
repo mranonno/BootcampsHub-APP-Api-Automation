@@ -1,7 +1,7 @@
 describe("Update member role with status code 200", () => {
   let accessToken;
   let chatId;
-  let memberId;
+  let memberId = "674e7e06f987f5001a56c5f8";
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
@@ -9,7 +9,6 @@ describe("Update member role with status code 200", () => {
     });
     cy.readFile("cypress/fixtures/studentLoginID.json").then((loginData) => {
       chatId = loginData.chatId;
-      memberId = loginData.memberId;
     });
   });
 
