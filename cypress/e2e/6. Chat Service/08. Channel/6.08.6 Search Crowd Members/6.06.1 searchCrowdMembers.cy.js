@@ -1,20 +1,20 @@
 describe("Search chat members with status code 200", () => {
   let accessToken;
-  let chatId;
+  let crowdId;
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
       accessToken = tokenData.studentLoginToken;
     });
-    cy.readFile("cypress/fixtures/studentLoginID.json").then((loginData) => {
-      chatId = loginData.chatId;
+    cy.readFile("cypress/fixtures/crowdId.json").then((crowdData) => {
+      crowdId = crowdData.crowdId;
     });
   });
 
   it("Checking if should be able Search chat members or not", () => {
     cy.request({
       method: "POST",
-      url: `/chat/members/${chatId}`,
+      url: `/chat/members/${crowdId}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
         // Organization: organizationId,
