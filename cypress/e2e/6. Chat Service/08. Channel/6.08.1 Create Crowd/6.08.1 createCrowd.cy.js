@@ -16,13 +16,13 @@ describe("Create crowd with status code 200", () => {
   it("Checking if should be able Create crowd or not", () => {
     cy.request({
       method: "POST",
-      url: `/chat/members/${chatId}`,
+      url: "/chat/channel/create",
       headers: {
         Authorization: `Bearer ${accessToken}`,
         Organization: organizationId,
       },
       body: {
-        name: faker.person.firstName,
+        name: faker.person.fullName,
         description: "It's description",
         users: ["64ef676669eaf6370c11429c", "650e70e7165fc20019352988"],
         isReadOnly: false,
