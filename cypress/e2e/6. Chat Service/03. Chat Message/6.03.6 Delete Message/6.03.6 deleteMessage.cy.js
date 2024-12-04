@@ -13,7 +13,7 @@ describe("Delete chat message with status code 200", () => {
 
   it("Checking if should be able Delete chat message or not", () => {
     cy.request({
-      method: "PUT",
+      method: "DELETE",
       url: `/chat/delete/message/${messageId}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
