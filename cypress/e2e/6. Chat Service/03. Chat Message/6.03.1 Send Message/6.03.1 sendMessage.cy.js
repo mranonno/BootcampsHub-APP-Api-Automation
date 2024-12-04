@@ -28,6 +28,10 @@ describe("Send chat message with status code 200", () => {
       failOnStatusCode: false,
     }).then((response) => {
       if (response.status === 200) {
+        cy.writeFile("cypress/fixtures/messageId.json", {
+          messageId: response.body.message._id,
+        });
+
         // Assertions
         expect(response.status).to.eq(200);
         expect(response.duration).to.be.lessThan(7000);
