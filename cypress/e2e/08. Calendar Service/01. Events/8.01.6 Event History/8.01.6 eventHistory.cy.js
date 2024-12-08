@@ -1,41 +1,36 @@
-describe.skip("Update message status with status code 200", () => {
+describe("Get event history successfully with status code 200", () => {
   let accessToken;
-  let messageId;
+  let eventId = "673de99fe2da047564276bf7";
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
       accessToken = tokenData.studentLoginToken;
     });
-    cy.readFile("cypress/fixtures/messageId.json").then((msgId) => {
-      messageId = msgId.messageId;
-    });
   });
 
-  it("Checking if should be able Update message status or not", () => {
+  it("Checking if should be able Get event history or not", () => {
     cy.request({
-      method: "PATCH",
-      url: `/chat/update-status/${messageId}`,
+      method: "POST",
+      url: "/history/getHistory",
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
       body: {
-        status: "delivered",
+        itemId: eventId,
       },
       failOnStatusCode: false,
     }).then((response) => {
       if (response.status === 200) {
         // Assertions
         expect(response.status).to.eq(200);
-        expect(response.duration).to.be.lessThan(7000);
+        expect(response.duration).to.be.lessThan(2000);
         expect(response.body).to.have.property("success", true);
         // Log the response for debugging
         cy.log("response.body", JSON.stringify(response.body, null, 1));
-        console.log("Update message status Response:", response.body);
+        cy.log("Get event history Response:", response.body);
+        console.log("Get event history Response:", response.body);
       } else {
-        cy.log(
-          "Update message status failed with status code: ",
-          response.status
-        );
+        cy.log("Get event history failed with status code: ", response.status);
         cy.log(response.body.error);
       }
     });
