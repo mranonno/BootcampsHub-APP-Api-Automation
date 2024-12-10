@@ -1,4 +1,4 @@
-describe.skip("Upload user document file with status code 200", () => {
+describe("Upload user document file with status code 200", () => {
   let accessToken;
 
   before(() => {
@@ -9,13 +9,13 @@ describe.skip("Upload user document file with status code 200", () => {
   });
 
   it("Should successfully upload user document file", () => {
-    const filePath = "/example-people.csv";
+    const filePath = "/image1.png";
 
     cy.fixture(filePath, "binary")
       .then(Cypress.Blob.binaryStringToBlob)
       .then((blob) => {
         const formData = new FormData();
-        formData.append("file", blob, "example-people.csv");
+        formData.append("file", blob, "image1.png");
 
         // Send PATCH request with FormData
         return cy.request({
