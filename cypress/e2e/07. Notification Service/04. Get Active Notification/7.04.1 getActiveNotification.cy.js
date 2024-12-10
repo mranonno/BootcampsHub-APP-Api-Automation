@@ -1,6 +1,6 @@
-describe.skip("Get active notification successfully with status code 200", () => {
+describe("Get active notification successfully with status code 200", () => {
   let accessToken;
-
+  let id = "674d5fea5889530019c2cae7";
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
       accessToken = tokenData.studentLoginToken;
@@ -9,8 +9,8 @@ describe.skip("Get active notification successfully with status code 200", () =>
 
   it("Checking if should be able Get active notification or not", () => {
     cy.request({
-      method: "POST",
-      url: `/notification/job/getactive/${sourceid}`,
+      method: "GET",
+      url: `/notification/job/getactive/${id}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
