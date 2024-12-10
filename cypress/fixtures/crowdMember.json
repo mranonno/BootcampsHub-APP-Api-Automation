@@ -1,13 +1,13 @@
 {
   "crowdMember": {
-    "_id": "67556a16733de6001a9c8654",
+    "_id": "6757a80d733de6001a9c8835",
     "mute": {
       "isMuted": false
     },
     "isBlocked": false,
     "isFavourite": false,
     "role": "member",
-    "chat": "67556a12733de6001a9c8646",
+    "chat": "6757a806733de6001a9c8819",
     "user": {
       "profilePicture": "https://ts4uportal-all-files-upload.nyc3.digitaloceanspaces.com/1732444816464-image1.png",
       "lastName": "Das",
@@ -16,8 +16,8 @@
       "lastActive": "2024-11-26T11:26:27.590Z",
       "fullName": "Anonno Das"
     },
-    "createdAt": "2024-12-08T09:42:46.773Z",
-    "updatedAt": "2024-12-08T09:42:46.773Z",
+    "createdAt": "2024-12-10T02:31:41.890Z",
+    "updatedAt": "2024-12-10T02:31:41.890Z",
     "__v": 0
   }
 }
