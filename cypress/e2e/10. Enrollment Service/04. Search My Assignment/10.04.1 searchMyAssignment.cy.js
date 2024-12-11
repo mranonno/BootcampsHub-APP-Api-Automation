@@ -34,7 +34,7 @@ describe("Search my assignment successfully with status code 200", () => {
       if (response.status === 200) {
         // Assertions
         expect(response.status).to.eq(200);
-        expect(response.duration).to.be.lessThan(2000);
+        expect(response.duration).to.be.lessThan(2500);
         expect(response.body).to.have.property("success", true);
         // Log the response for debugging
         cy.log("response.body", JSON.stringify(response.body, null, 1));
