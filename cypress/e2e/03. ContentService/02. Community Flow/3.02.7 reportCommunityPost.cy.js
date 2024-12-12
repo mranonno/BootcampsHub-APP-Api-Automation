@@ -1,13 +1,16 @@
-describe.skip("Report community post successfully with status code 200", () => {
+describe("Report community post successfully with status code 200", () => {
   let accessToken;
+  let communityPostId;
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
       accessToken = tokenData.studentLoginToken;
     });
-    cy.readFile("cypress/fixtures/courseId.json").then((courseData) => {
-      course_id = courseData.courseId;
-    });
+    cy.readFile("cypress/fixtures/communityPostId.json").then(
+      (communityData) => {
+        communityPostId = communityData.community_postId;
+      }
+    );
   });
 
   it("Checking if should be able Report community post or not", () => {
@@ -18,10 +21,10 @@ describe.skip("Report community post successfully with status code 200", () => {
         Authorization: `Bearer ${accessToken}`,
       },
       body: {
-        post: "{{postId}}",
+        post: communityPostId,
         action: "report",
         reportReason: "spam",
-        note: "{{note}}",
+        note: "note",
       },
       failOnStatusCode: false,
     }).then((response) => {

@@ -1,21 +1,27 @@
 describe("Edit community post successfully with status code 200", () => {
   let accessToken;
+  let communityPostId;
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
       accessToken = tokenData.studentLoginToken;
     });
+    cy.readFile("cypress/fixtures/communityPostId.json").then(
+      (communityData) => {
+        communityPostId = communityData.community_postId;
+      }
+    );
   });
 
   it("Checking if should be able Edit community post or not", () => {
     cy.request({
       method: "PATCH",
-      url: "/content/community/post/edit/673905dc92731d9ad8c78e37",
+      url: `/content/community/post/edit/${communityPostId}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
       body: {
-        title: "Community post testing",
+        title: "Community post testing for edit",
         description: "Description text",
         tags: "#app",
         attachments: "",
