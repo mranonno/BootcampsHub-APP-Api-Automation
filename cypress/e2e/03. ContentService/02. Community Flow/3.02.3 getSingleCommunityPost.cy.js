@@ -1,16 +1,22 @@
 describe("Get single community post successfully with status code 200", () => {
   let accessToken;
+  let communityPostId;
 
   before(() => {
     cy.readFile("cypress/fixtures/studentToken.json").then((tokenData) => {
       accessToken = tokenData.studentLoginToken;
     });
+    cy.readFile("cypress/fixtures/communityPostId.json").then(
+      (communityData) => {
+        communityPostId = communityData.community_postId;
+      }
+    );
   });
 
   it("Checking if should be able get single community post or not", () => {
     cy.request({
       method: "GET",
-      url: "/content/community/post/673905dc92731d9ad8c78e37",
+      url: `/content/community/post/${communityPostId}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

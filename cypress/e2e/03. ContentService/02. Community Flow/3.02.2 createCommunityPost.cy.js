@@ -1,6 +1,4 @@
-const { faker } = require("@faker-js/faker");
-
-describe.skip("Create community post successfully with status code 200", () => {
+describe("Create community post successfully with status code 200", () => {
   let accessToken;
   let organizationId;
 
@@ -22,14 +20,18 @@ describe.skip("Create community post successfully with status code 200", () => {
         Organization: organizationId,
       },
       body: {
-        title: faker.lorem,
-        description: faker.lorem,
+        title: "Mobile App Api Testing",
+        description: "community post for mobile app api testing",
         attachments: [],
         tags: [],
       },
       failOnStatusCode: false,
     }).then((response) => {
       if (response.status === 200) {
+        cy.writeFile("cypress/fixtures/communityPostId.json", {
+          community_postId: response.body.post._id,
+        });
+
         // Assertions
         expect(response.status).to.eq(200);
         expect(response.duration).to.be.lessThan(2000);
