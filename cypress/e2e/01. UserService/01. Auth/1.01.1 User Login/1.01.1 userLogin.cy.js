@@ -8,7 +8,7 @@ describe("Login to the portal with valid credential and get stats code 200", () 
     });
   });
 
-  it("should be able to login", () => {
+  it("Checking if should be able to login user", () => {
     cy.request({
       method: "POST",
       url: "/user/login",

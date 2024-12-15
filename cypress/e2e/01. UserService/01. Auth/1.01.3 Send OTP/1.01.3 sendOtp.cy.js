@@ -1,13 +1,12 @@
-describe("Get OTP on my email successfully with status code 200", () => {
+describe("Send OTP to email successfully with status code 200", () => {
   let userId;
-
   before(() => {
     cy.readFile("cypress/fixtures/studentLoginID.json").then((data) => {
       userId = data.userId;
     });
   });
 
-  it("Should be able to send OTP to email", () => {
+  it("Checking if should be able to send OTP to email", () => {
     cy.request({
       method: "POST",
       url: "/user/sendotp",

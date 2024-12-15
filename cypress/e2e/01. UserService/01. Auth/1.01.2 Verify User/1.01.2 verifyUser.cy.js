@@ -6,30 +6,22 @@ describe("Verify user successfully with status code 200", () => {
     });
   });
 
-  it("should be able to verify user", () => {
-    // const otp = "863182";
-
+  it("Checking if should be able to verify user", () => {
     cy.request({
       method: "POST",
       url: "/user/verify",
       headers: {
         Authorization: `Bearer ${studentToken}`,
       },
-      body: {
-        // otp: otp,
-        // channel: "email",
-        // userId: studentToken, // Use student ID obtained from fixture
-      },
+      body: {},
     }).then((response) => {
       if (response.status === 200) {
-        cy.log("Verification successful"); // Log successful verification
-        console.log("Verification successful");
-        // Assertions
-        expect(response.status).to.eq(200); // Check if the status code is 200
-        expect(response.body).to.have.property("success", true); // Check if the success property is true
+        cy.log("User verified successfully");
+        console.log("User verified successfully");
+        expect(response.status).to.eq(200);
+        expect(response.body).to.have.property("success", true);
         expect(response.duration).to.be.lessThan(3000);
       } else {
-        // Handle unsuccessful verification
         cy.log("Verification failed with status:", response.status);
         cy.log(response.body);
         console.log("Verification failed with status:", response.status);
