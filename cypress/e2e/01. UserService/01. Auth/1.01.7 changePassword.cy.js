@@ -15,9 +15,9 @@ describe("Change my password successfully with status code 200", () => {
         Authorization: `Bearer ${accessToken}`,
       },
       body: {
-        currentPassword: "Anonno#1",
-        newPassword: "Anonno#1",
-        confirmPassword: "Anonno#1",
+        currentPassword: "Ashraful186@",
+        newPassword: "Ashraful186@",
+        confirmPassword: "Ashraful186@",
       },
       failOnStatusCode: false,
     }).then((response) => {

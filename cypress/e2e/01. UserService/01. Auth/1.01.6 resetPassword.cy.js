@@ -1,4 +1,4 @@
-describe.skip("Reset my password successfully with status code 200", () => {
+describe("Reset my password successfully with status code 200", () => {
   let studentEmail;
   let studentNumber;
   let accessToken;

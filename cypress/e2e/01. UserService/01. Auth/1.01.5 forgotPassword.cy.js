@@ -1,4 +1,4 @@
-describe.skip("Forgot password functionality if I forgot my password successfully with status code 200", () => {
+describe("Forgot password functionality if I forgot my password successfully with status code 200", () => {
   let studentEmail;
   let studentNumber;
 
