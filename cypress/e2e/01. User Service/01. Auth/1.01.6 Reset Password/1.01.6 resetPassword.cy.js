@@ -6,7 +6,6 @@ describe("Reset my password successfully with status code 200", () => {
   let otp = 878687;
 
   before(() => {
-    // Combine reading files using Cypress.Promise.all for efficiency
     cy.wrap(
       Cypress.Promise.all([
         cy.readFile("cypress/fixtures/studentToken.json"),
@@ -38,7 +37,6 @@ describe("Reset my password successfully with status code 200", () => {
       failOnStatusCode: false,
     }).then((response) => {
       if (response.status === 200) {
-        // Assertions
         expect(response.status).to.eq(200);
         expect(response.body).to.have.property("success", true);
         expect(response.duration).to.be.lessThan(2000);
